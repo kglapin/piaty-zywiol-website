@@ -1,0 +1,60 @@
+---
+const testimonials = [
+  {
+    name: 'p. mazanowska',
+    text: 'Serdecznie polecam! Brwi wykonane perfekcyjnie - mają piękny kształt i wyglądają bardzo naturalnie. Oczyszczanie wodorowe również rewelacja - skóra po zabiegu jest gładka, świeża i pełna blasku. Widać, że wszystko robione z ogromną starannością i pasją. Na pewno wrócę!',
+  },
+  {
+    name: 'Weronika Wojciechowska',
+    text: 'Jestem bardzo zadowolona z pracy Pani Marty. Masaż mnie bardzo zrelaksował i czułam się odprężona, atmosfera w salonie była niesamowita. Sama Pani Marta ze szczerym uśmiechem na twarzy potrafiła zagadać na każdy temat. Na pewno jeszcze tu wrócę, bardzo polecam ❤️',
+  },
+  {
+    name: 'Daria Włodarska',
+    text: 'Byłam na masażu Marma - bardzo fajna sprawa. Stres, aż trudno w to uwierzyć, ale spływał ze mnie. Wyszłam z niego bardzo zrelaksowana i gotowa do dalszego działania. Pani Marta jest bardzo sympatyczną osobą, która potrafi działać cuda! Na pewno udam się tam kolejny raz.',
+  },
+  {
+    name: 'Kamiix xx',
+    text: 'Piąty Żywioł & Marta Włodarska to miejsce, do którego wracam z przyjemnością. Atmosfera jest spokojna i pełna ciepła. Zdecydowanie polecam każdemu, kto chce zadbać o swój wygląd i dobre samopoczucie.',
+  },
+  {
+    name: 'Jaroslaw Czyjt',
+    text: 'Masaże wykonywane przez Panią Martę to naprawdę inne doświadczenie niż te, jakie miałem okazję odczuć u innych masażystów. Doskonale wyuczona technika masażu, spore doświadczenie, nastrój i podejście do klienta czynią ten salon bardzo wyjątkowym.',
+  },
+  {
+    name: 'Wiktoria 3107',
+    text: 'Polecam salon Piąty Żywioł. Pani Marta miła, uśmiechnięta i utalentowana. Masaż bardzo przyjemny, mogłam się zrelaksować i oczyścić umysł. Na pewno wrócę na kolejne usługi.',
+  },
+  {
+    name: 'Agnieszka Olejnik',
+    text: 'Nie wiem jak Marta to robi, ale przy jej masażach dosłownie odpływam. Sama jej osoba i atmosfera w salonie dają niezapomnianych doznań. Zawsze wracam z radością i pewnością, że wyjdę dopieszczona i szczęśliwa. Polecam!',
+  },
+];
+---
+<section id="opinie" class="relative overflow-hidden px-5 py-24 text-center lg:px-10 lg:py-32">
+  <div class="section-content mx-auto max-w-5xl reveal">
+    <p class="mb-4 text-xs font-semibold uppercase tracking-[.34em] text-clay">Opinie</p>
+    <h2 class="mx-auto max-w-3xl font-display text-5xl font-medium leading-[.95] tracking-[-.035em] md:text-7xl">Klientki i Klienci wracają tu po spokój, efekt i atmosferę.</h2>
+
+    <div class="relative mx-auto mt-14 min-h-[540px] max-w-4xl md:min-h-[430px]">
+      {testimonials.map((t, i) => (
+        <article class:list={['testimonial-slide absolute inset-0 rounded-[2.5rem] border border-cocoa/10 bg-white/55 p-8 text-left shadow-soft backdrop-blur md:p-12', { 'is-active': i === 0 }]} data-testimonial-slide>
+          <div class="mb-8 flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
+            <div>
+              <p class="font-display text-3xl leading-none">{t.name}</p>
+            </div>
+            <p class="text-lg tracking-[.18em] text-gold">★★★★★</p>
+          </div>
+          <p class="font-display text-2xl leading-snug tracking-[-.015em] md:text-4xl">{t.text}</p>
+        </article>
+      ))}
+    </div>
+
+    <div class="mt-8 flex flex-col items-center justify-center gap-5" aria-label="Wybierz opinię">
+      <div class="flex items-center justify-center gap-3">
+        {testimonials.map((_, i) => (
+          <button class:list={['testimonial-dot', { 'is-active': i === 0 }]} type="button" data-testimonial-dot aria-label={`Opinia ${i + 1}`}></button>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

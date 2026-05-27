@@ -1,0 +1,178 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --progress: 0;
+  --mouse-x: 50%;
+  --mouse-y: 50%;
+}
+
+body {
+  background: #F7F3EC;
+  color: #2A211B;
+  overflow-x: hidden;
+}
+
+.page-shell {
+  max-width: 1440px;
+  margin: 0 auto;
+  background:
+    radial-gradient(circle at 18% 12%, rgba(216,168,156,.18), transparent 28%),
+    radial-gradient(circle at 88% 42%, rgba(164,169,134,.17), transparent 25%),
+    #F7F3EC;
+  box-shadow: 0 0 0 1px rgba(255,255,255,.08), 0 40px 140px rgba(0,0,0,.45);
+}
+
+#scrollProgress {
+  transform: scaleX(var(--progress));
+  transform-origin: 0 50%;
+}
+
+.hero-bg {
+  background-image:
+    linear-gradient(90deg, rgba(21,17,16,.92), rgba(21,17,16,.62) 46%, rgba(21,17,16,.32)),
+    url('https://images.unsplash.com/photo-1519823551278-64ac92734fb1?auto=format&fit=crop&w=1800&q=85');
+  background-size: cover;
+  background-position: center;
+}
+
+.noise::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: .24;
+  mix-blend-mode: soft-light;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 220 220' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.88' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+}
+
+.reveal {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1);
+  filter: blur(0);
+  transition: opacity .9s cubic-bezier(.22,1,.36,1), transform .9s cubic-bezier(.22,1,.36,1), filter .9s cubic-bezier(.22,1,.36,1);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translate3d(0,0,0) scale(1);
+  filter: blur(0);
+}
+
+.split-line {
+  display: block;
+  overflow: hidden;
+}
+
+.split-line > span {
+  display: inline-block;
+  transform: translateY(110%);
+  transition: transform .95s cubic-bezier(.22,1,.36,1);
+}
+
+.is-visible .split-line > span {
+  transform: translateY(0);
+}
+
+.stagger > * {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity .7s ease, transform .7s ease;
+}
+
+.stagger.is-visible > * {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.stagger.is-visible > *:nth-child(2) { transition-delay: .08s; }
+.stagger.is-visible > *:nth-child(3) { transition-delay: .16s; }
+.stagger.is-visible > *:nth-child(4) { transition-delay: .24s; }
+.stagger.is-visible > *:nth-child(5) { transition-delay: .32s; }
+.stagger.is-visible > *:nth-child(6) { transition-delay: .40s; }
+
+.glass-card {
+  background: rgba(255,255,255,.54);
+  border: 1px solid rgba(42,33,27,.08);
+  box-shadow: var(--tw-shadow, 0 28px 80px rgba(42, 33, 27, .13));
+  backdrop-filter: blur(16px);
+}
+
+.magnetic {
+  transform: translate3d(var(--tx, 0), var(--ty, 0), 0);
+  transition: transform .18s ease, background .2s ease, border-color .2s ease;
+}
+
+.parallax-frame {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.parallax-img {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  height: calc(100% + 180px);
+  max-width: none;
+  object-fit: cover;
+  transform: translateY(calc(-50% + var(--scroll-shift, 0) * 1px)) scale(1.035);
+  transition: transform .08s linear;
+  will-change: transform;
+}
+
+.service-track {
+  transform: translateX(calc(var(--service-shift, 0) * -1px));
+  will-change: transform;
+}
+
+.clip-soft {
+  clip-path: polygon(8% 0%, 100% 0%, 92% 100%, 0% 100%);
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+.section-content {
+  position: relative;
+  z-index: 1;
+}
+
+.testimonial-slide {
+  opacity: 0;
+  transform: translateY(18px) scale(.985);
+  pointer-events: none;
+  transition: opacity .75s cubic-bezier(.22,1,.36,1), transform .75s cubic-bezier(.22,1,.36,1);
+}
+
+.testimonial-slide.is-active {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+.testimonial-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+  background: rgba(42, 33, 27, .18);
+  transition: width .35s ease, background .35s ease;
+}
+
+.testimonial-dot.is-active {
+  width: 34px;
+  background: #B96F55;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition: none !important;
+  }
+  .reveal, .split-line > span, .stagger > * { opacity: 1; transform: none; filter: none; }
+}
