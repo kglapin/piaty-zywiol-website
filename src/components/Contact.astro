@@ -45,16 +45,31 @@
           <a class="mt-2 block text-xl font-bold text-cocoa" href="tel:721050353">721 050 353</a>
         </div>
         <div class="overflow-hidden rounded-[1.5rem]">
-          <iframe
-            src="https://maps.google.com/maps?q=Babina+5+Kalisz+Polska&output=embed"
-            width="100%"
-            height="220"
-            style="border:0;"
-            allowfullscreen=""
-            loading="lazy"
-          ></iframe>
+          <div data-map-placeholder class="flex min-h-[220px] flex-col items-center justify-center gap-3 bg-sand px-6 py-7 text-center">
+            <p class="max-w-sm text-sm leading-6 text-cocoa/75">Mapa Google nie ładuje się automatycznie. Po jej załadowaniu Google może otrzymać Twój adres IP i informacje techniczne o przeglądarce.</p>
+            <button id="load-google-map" type="button" class="rounded-full bg-cocoa px-5 py-3 text-sm font-medium text-cream transition hover:bg-cocoa/85">Załaduj mapę Google</button>
+            <a href="https://maps.google.com/maps?q=Babina+5+Kalisz+Polska" target="_blank" rel="noreferrer" class="text-sm underline decoration-gold underline-offset-4">Otwórz mapę w nowej karcie</a>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </section>
+
+<script>
+  const mapButton = document.querySelector<HTMLButtonElement>('#load-google-map');
+
+  mapButton?.addEventListener('click', () => {
+    const map = document.createElement('iframe');
+    map.src = 'https://maps.google.com/maps?q=Babina+5+Kalisz+Polska&output=embed';
+    map.title = 'Mapa dojazdu do Piątego Żywiołu przy ul. Babina 5 w Kaliszu';
+    map.width = '100%';
+    map.height = '220';
+    map.style.border = '0';
+    map.loading = 'eager';
+    map.referrerPolicy = 'strict-origin-when-cross-origin';
+    map.setAttribute('allowfullscreen', '');
+
+    mapButton.closest('[data-map-placeholder]')?.replaceWith(map);
+  });
+</script>
